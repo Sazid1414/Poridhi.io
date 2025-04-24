@@ -11,10 +11,8 @@ spring:
           json:
             trusted:
               packages: "*"
-  data:
-    elasticsearch:
-      cluster-name: elasticsearch
-      cluster-nodes: localhost:9200
+  elasticsearch:
+    uris: http://localhost:9200
 eureka:
   client:
     service-url:

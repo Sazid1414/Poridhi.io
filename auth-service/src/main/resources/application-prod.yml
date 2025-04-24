@@ -1,0 +1,14 @@
+server:
+  port: 8086
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:8761/eureka/
+keycloak:
+  auth-server-url: http://keycloak:8080/auth
+  realm: ecommerce-realm
+  resource: ecommerce-client
+  credentials:
+    secret: ${KEYCLOAK_CLIENT_SECRET}
+  public-client: false
+  bearer-only: false

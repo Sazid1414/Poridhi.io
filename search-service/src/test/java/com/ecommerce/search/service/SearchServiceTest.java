@@ -21,6 +21,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -56,7 +57,20 @@ class SearchServiceTest {
 
     @Test
     void searchProducts_ReturnsResults() {
-        SearchHit<SearchResponse> searchHit = new SearchHit<>(null, null, null, 1.0f, null, null, searchResponse);
+        // Provide all 11 arguments to the SearchHit constructor in the correct order
+        SearchHit<SearchResponse> searchHit = new SearchHit<>(
+                "1",               // id
+                "products",       // index (matches the @Document(indexName = "products") in SearchResponse)
+                null,             // routing
+                1.0f,             // score
+                null,             // sortValues
+                null,             // highlightFields
+                null,             // innerHits
+                null,             // explanation
+                null,             // matchedQueries
+                null,             // nestedMetaData
+                searchResponse    // content
+        );
         when(searchHits.stream()).thenReturn(Collections.singletonList(searchHit).stream());
         when(elasticsearchOperations.search(any(CriteriaQuery.class), eq(SearchResponse.class))).thenReturn(searchHits);
 
